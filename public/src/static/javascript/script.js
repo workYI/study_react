@@ -20,9 +20,13 @@ var CommentBox1 = React.createClass({
 	componentDidMount: function(){
 		$.ajax({
 			url : this.props.url,
+			cache: true,
 			dataType: 'json',
 			success: function(data2){
 				this.setState({data: data2});
+			}.bind(this),
+			error: function(){
+				console.error(this.props.url);
 			}.bind(this)
 		});
 	},
