@@ -8,6 +8,9 @@ var data = [
 
 // クラスの定義
 var CommentBox1 = React.createClass({
+
+	// propsだと値の読み取りはできるが、変更はできない
+	// 値を変更したい場合はstateを使用する。stateを使用するためにgetInitialStateで初期化する
 	getInitialState: function(){
 		return {data: [
 		]};
