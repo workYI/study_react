@@ -4,6 +4,7 @@ var data = [
 	{id: 2, author: "マーク・トウェイン", text: "禁煙なんてたやすい。私は*何千回*もやった。"}
 ];
 */
+// testGit
 
 // クラスの定義
 var CommentBox1 = React.createClass({
