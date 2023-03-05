@@ -11,9 +11,20 @@ var CommentBox1 = React.createClass({
 
 	// propsだと値の読み取りはできるが、変更はできない
 	// 値を変更したい場合はstateを使用する。stateを使用するためにgetInitialStateで初期化する
+	
+	// componentDidMountメソッドでurl="/api/comments"の値をajaxで読み込む
+	// ajaxはjQueryを使用して読み込む（htmlにCDNを追加）
 	getInitialState: function(){
-		return {data: [
-		]};
+		return {data: []};
+	},
+	componentDidMount: function(){
+		$.ajax({
+			url : this.props.url,
+			dataType: 'json',
+			success: function(data2){
+				this.setState({data: data2});
+			}.bind(this)
+		});
 	},
 	render: function() {
 		return (
@@ -102,6 +113,6 @@ var CommentForm = React.createClass({
 // 第一引数：どのクラスから作ったものかを定義
 // 第二引数：どこに差し込むのかを定義（HTML側で定義する）
 ReactDOM.render(
-	<CommentBox url="/api/comments" />,
+	<CommentBox1 url="/api/comments" />,
 	document.getElementById('content_1')
 );
