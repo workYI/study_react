@@ -111,22 +111,28 @@ var Comment = React.createClass({
 var CommentForm = React.createClass({
 	getInitialState: function(){
 		return {
-			auther: "aaa",
-			text: "bbb"
+			auther: '',
+			text: ''
 		};
+	},
+	handleAuthorChange: function(eventObject){
+		this.setState({auther: eventObject.target.value});
+	},
+	handleTextChange: function(eventObject){
+		this.setState({text: eventObject.target.value});
 	},
 	handleSubmit: function(eventObject){
 		eventObject.preventDefault();
 		var auther = this.state.auther;
 		var text = this.state.text;
 		console.log(auther, text);
-
+		this.setState({author: '', text: ''});
 	},
 	render: function() {
 		return (
 			<form className="CommentForm" onSubmit={this.handleSubmit}>
-				<input type="text" placeholder="名前" />
-				<input type="text" placeholder="コメントを入力" />
+				<input type="text" placeholder="名前" value={this.state.author} onChange={this.handleAuthorChange}/>
+				<input type="text" placeholder="コメントを入力" value={this.state.text} onChange={this.handleTextChange}/>
 				<input type="submit" value="送信" />
 			</form>
 		);
