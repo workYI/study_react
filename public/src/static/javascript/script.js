@@ -1,19 +1,18 @@
-/*
-var data = [
-	{id: 1, author: "ヘンリー・キッシンジャー", text: "チャンスは__貯金__できない。"},
-	{id: 2, author: "マーク・トウェイン", text: "禁煙なんてたやすい。私は*何千回*もやった。"}
-];
-*/
-// testGit
 
 // クラスの定義
 var CommentBox1 = React.createClass({
 
-	// propsだと値の読み取りはできるが、変更はできない
-	// 値を変更したい場合はstateを使用する。stateを使用するためにgetInitialStateで初期化する
+	/*
+	 propsだと値の読み取りはできるが、変更はできない
+	 値を変更したい場合はstateを使用する。stateを使用するためにgetInitialStateで初期化する
 	
-	// componentDidMountメソッドでurl="/api/comments"の値をajaxで読み込む
-	// ajaxはjQueryを使用して読み込む（htmlにCDNを追加）
+	 componentDidMountメソッドでurl="/api/comments"の値をajaxで読み込む
+	 ajaxはjQueryを使用して読み込む（htmlにCDNを追加）
+
+	 メソッド外の値を「this.***」で使用する場合、thisは同一メソッド内の値の意味になるので
+	 bind(this)を記載する。
+	*/
+
 	getInitialState: function(){
 		return {data: []};
 	},
@@ -106,12 +105,15 @@ var Comment = React.createClass({
 var CommentForm = React.createClass({
 	render: function() {
 		return (
-			<div className="CommentForm">
-			CommentContentsを表示
-			</div>
+			<form className="CommentForm">
+				<input type="text" placeholder="名前" />
+				<input type="text" placeholder="コメントを入力" />
+				<input type="submit" value="送信" />
+			</form>
 		);
 	}
 });
+
 
 
 // 第一引数：どのクラスから作ったものかを定義
