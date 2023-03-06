@@ -102,10 +102,29 @@ var Comment = React.createClass({
 	}
 });
 
+/*
+ formタグの中に「onSubmit={this.handleSubmit}」を指定することでボタン押下時のイベントを定義
+ handleSubmitメソッドでボタン押下時の処理を定義。
+ 「ventObject.preventDefault();」でsubmitボタン押下時のデフォルト処理を無効化
+ getInitialStateメソッドでクラスオブジェクトの読み込み時の動作を定義
+*/
 var CommentForm = React.createClass({
+	getInitialState: function(){
+		return {
+			auther: "aaa",
+			text: "bbb"
+		};
+	},
+	handleSubmit: function(eventObject){
+		eventObject.preventDefault();
+		var auther = this.state.auther;
+		var text = this.state.text;
+		console.log(auther, text);
+
+	},
 	render: function() {
 		return (
-			<form className="CommentForm">
+			<form className="CommentForm" onSubmit={this.handleSubmit}>
 				<input type="text" placeholder="名前" />
 				<input type="text" placeholder="コメントを入力" />
 				<input type="submit" value="送信" />
