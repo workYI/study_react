@@ -126,9 +126,14 @@ var CommentForm = React.createClass({
 	},
 	handleSubmit: function(eventObject){
 		eventObject.preventDefault();
-		var author = this.state.author;
-		var text = this.state.text;
-		//console.log(author, text);
+		var author = this.state.author.trim();
+		var text = this.state.text.trim();
+
+		// エラーハンドリング
+		if(!author || !text){
+			return;
+		}
+
 		this.props.onCommentSubmit2({author: author, text: text});
 		this.setState({author: '', text: ''});
 	},
