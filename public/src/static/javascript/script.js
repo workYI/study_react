@@ -29,12 +29,15 @@ var CommentBox1 = React.createClass({
 			}.bind(this)
 		});
 	},
+	handleCommentSubmit2: function(comment){
+		console.log(comment);
+	},
 	render: function() {
 		return (
 			<div className="CommentBox1">
 			    <h1>コメント</h1>
 				<CommentList data={this.state.data} />
-                <CommentForm />
+                <CommentForm onCommentSubmit2={this.handleCommentSubmit2}/>
 			</div>
 		);
 	}
@@ -60,26 +63,6 @@ var CommentList = React.createClass({
 		);
 	} 
 });
-
-/*
-var Comment = React.createClass({
-	render: function() {
-        // Remarkableインスタンスを生成
-        var markDown = new Remarkable();
-
-        // Remarkableクラスを定義
-        var rawMarkup = markDown.render(this.props.children);
-
-		return (
-			<div className="Comment">
-                <h2>No.{this.props.orderno} {this.props.author}</h2>
-				{this.props.children}
-                <span dangerouslySetInnerHTML={{__html: rawMarkup}}></span>
-			</div>
-		);
-	}
-});
-*/
 
 var Comment = React.createClass({
     // rawMarkupプロパティの定義
@@ -107,25 +90,32 @@ var Comment = React.createClass({
  handleSubmitメソッドでボタン押下時の処理を定義。
  「ventObject.preventDefault();」でsubmitボタン押下時のデフォルト処理を無効化
  getInitialStateメソッドでクラスオブジェクトの読み込み時の動作を定義
+
+ onChangeプロパティの説明
+ 通常は入力フィールドからポインタが外れた時に発動する
+ Reactの場合は入力フィールドの値が変更されるたびに発動する（一文字ずつのイメージ）
+
+ イベントハンドラなので引数に[eventObject]を設定する
 */
 var CommentForm = React.createClass({
 	getInitialState: function(){
 		return {
-			auther: '',
+			author: '',
 			text: ''
 		};
 	},
 	handleAuthorChange: function(eventObject){
-		this.setState({auther: eventObject.target.value});
+		this.setState({author: eventObject.target.value});
 	},
 	handleTextChange: function(eventObject){
 		this.setState({text: eventObject.target.value});
 	},
 	handleSubmit: function(eventObject){
 		eventObject.preventDefault();
-		var auther = this.state.auther;
+		var author = this.state.author;
 		var text = this.state.text;
-		console.log(auther, text);
+		//console.log(author, text);
+		this.props.onCommentSubmit2({author: author, text: text});
 		this.setState({author: '', text: ''});
 	},
 	render: function() {
