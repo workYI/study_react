@@ -31,6 +31,20 @@ var CommentBox1 = React.createClass({
 	},
 	handleCommentSubmit2: function(comment){
 		console.log(comment);
+
+		$.ajax({
+			url : this.props.url,
+			dataType: 'json',
+			type: 'POST',
+			data: comment,
+			success: function(data){
+				this.setState({data: data});
+			}.bind(this),
+			error: function(){
+				console.error(this.props.url);
+			}.bind(this)
+		});
+
 	},
 	render: function() {
 		return (
